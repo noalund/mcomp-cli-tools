@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+
+def force12(x):
+    return x % 12
+
+# Ask for row:
+row = list(map(int, input("Type pitches with spaces (3 1 0 9): ").split()))
+
+n = len(row)
+
+if n == 0:
+    print("You didn't give any pitches.")
+    exit()
+
+# Create empty matrix:
+matrix = [[0] * n for _ in range(n)]
+
+# Prime rows:
+for j in range(n):
+    matrix[0][j] = force12(row[j])
+
+# Inversions:
+for i in range(n):
+    matrix[i][0] = force12(2 * row[0] - row[i])
+
+# Complete matrix:
+for i in range(1, n):
+    for j in range(1, n):
+        matrix[i][j] = force12(
+            matrix[i][0] + (row[j] - row[0])
+        )
+
+print("\nMatrix:")
+
+for matrix_row in matrix:
+    print(" ".join(f"{x:3}" for x in matrix_row))
