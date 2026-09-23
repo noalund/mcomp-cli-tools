@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+# Gematria calculator (English alphabet)
+
+
+def value(letter):
+    return ord(letter.lower()) - ord('a') + 1
+
+# Ask for word:
+word = input("Type a word: ").strip()
+
+if not word:
+    print("You didn't give a word.")
+    exit()
+
+# Get letters:
+letters = [letter for letter in word if letter.isalpha()]
+
+# Calculate values:
+values = [value(letter) for letter in letters]
+
+print("\nLetters:")
+print(" ".join(letters))
+
+print("\nValues:")
+print(" ".join(str(x) for x in values))
+
+print(f"\nTotal: {sum(values)}")
